@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 
-class registerController extends Controller
+class registerController extends BaseController
 {
     //
     use validateJson;

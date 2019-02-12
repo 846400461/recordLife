@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
-class loginController extends Controller
+class loginController extends BaseController
 {
     //
     use validateJson;
