@@ -37,9 +37,10 @@ $api->version('v1', function($api) {
     $api->post('login','App\Http\Controllers\api\loginController@vertify');
 
     $api->group(['middleware' => 'my.api.auth'], function ($api) {
-        $api->get('/user', function (Request $request) {
+        $api->get('user/info', function (Request $request) {
             return $request->user('api');
         });
+
 
     });
 
