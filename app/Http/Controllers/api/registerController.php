@@ -30,7 +30,7 @@ class registerController extends BaseController
                 if(User::where('email',$userInfo['email'])->exists())
                 {
                     $erroCode|=1<<3;
-                    return compact("erroCode");
+                    return response()->json(compact('erroCode'),403);
                 }
                 User::create([
                     'name' => $userInfo['name'],
@@ -38,16 +38,16 @@ class registerController extends BaseController
                     'password' => Hash::make($userInfo['password']),
                     'api_token'=> str_random(64),
                     ]);
-                return compact("erroCode");
+                return response()->noContent(200);
             }
             else
             {
-                return compact("erroCode");
+                return response()->json(compact('erroCode'),403);
             }
 
         }
         else
-            return 'no json';
+            return response()->noContent(400);
     }
 
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,11 +36,11 @@ $api->version('v1', function($api) {
     $api->get('register','App\Http\Controllers\api\registerController@register');
     $api->post('register','App\Http\Controllers\api\registerController@create');
     $api->post('login','App\Http\Controllers\api\loginController@vertify');
+    $api->get('test','App\Http\Controllers\api\testController@test');
 
     $api->group(['middleware' => 'my.api.auth'], function ($api) {
-        $api->get('user/info', function (Request $request) {
-            return $request->user('api');
-        });
+        $api->get('user/info', 'App\Http\Controllers\api\userInfoController@userInfo');
+        $api->post('user/info', 'App\Http\Controllers\api\userInfoController@updateUserInfo');
 
 
     });

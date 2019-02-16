@@ -35,8 +35,12 @@ class apiAuth
             return 1<<6;
         $useStr=str_after($apiToken,' ');
         $useId=intval($useStr);
-        $user=User::where('id',$useId);
-        $token=$user->value('api_token');
+        $user=User::find($useId);
+        if(empty($user))
+        {
+            return 1<<4;
+        }
+        $token=$user->api_token;
         if(empty($token))
             return 1<<4;
         if($token!=$apiToken)
