@@ -41,8 +41,9 @@ $api->version('v1', function($api) {
     $api->group(['middleware' => 'my.api.auth'], function ($api) {
         $api->get('user/info', 'App\Http\Controllers\api\userInfoController@userInfo');
         $api->post('user/info', 'App\Http\Controllers\api\userInfoController@updateUserInfo');
-
-
+        $api->post('user/dateinfo','App\Http\Controllers\api\dateInfoController@submitDateInfo');
+        $api->post('user/dateinfo/background/{dateId}','App\Http\Controllers\api\dateInfoController@uploadBackground');
+        $api->get('user/dateinfo','App\Http\Controllers\api\dateInfoController@dateinfo');
     });
 
 });

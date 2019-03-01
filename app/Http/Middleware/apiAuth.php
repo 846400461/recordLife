@@ -35,20 +35,18 @@ class apiAuth
             return 1<<6;
         $useStr=str_after($apiToken,' ');
         $useId=intval($useStr);
-        $user=User::find($useId);
+
+        $user=Auth::guard('api')->getProvider()->retrieveById($useId);
         if(empty($user))
         {
             return 1<<4;
         }
         $token=$user->api_token;
-        if(empty($token))
-            return 1<<4;
         if($token!=$apiToken)
         {
             return 1<<4;
         }
-        $puser=Auth::guard('api')->getProvider()->retrieveById($useId);
-        Auth::guard('api')->setUser($puser);
+        Auth::guard('api')->setUser($user);
         return 0;
     }
 }

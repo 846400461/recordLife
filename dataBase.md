@@ -7,6 +7,7 @@
 | message  | varchar  |                      |
 |   type   | tinyint  |                      |
 | goodDate | datetime |                      |
+| fileName | varchar  |                      |
 
 
 
