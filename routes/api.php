@@ -44,6 +44,7 @@ $api->version('v1', function($api) {
         $api->post('user/dateinfo','App\Http\Controllers\api\dateInfoController@submitDateInfo');
         $api->post('user/dateinfo/background/{dateId}','App\Http\Controllers\api\dateInfoController@uploadBackground');
         $api->get('user/dateinfo','App\Http\Controllers\api\dateInfoController@dateinfo');
+        $api->get('user/image','App\Http\Controllers\api\dateInfoController@downloadImage');
     });
 
 });

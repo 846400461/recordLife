@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use App\GoodDate;
 use Carbon\Carbon;
 use App\Http\Resources\GoodDateResource;
-//use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Storage;
+use Log;
 
 class dateInfoController extends BaseController
 {
@@ -47,6 +48,7 @@ class dateInfoController extends BaseController
 
         $path=strval($request->user('api')->id)."/$dateId/dateFile";
         $path=$file->store($path);
+        $path=str_replace_first(strval($request->user('api')->id).'/','',$path);
         if(empty($goodDate->fileName)||$goodDate->fileName=='')
             $goodDate->fileName=$fileName.'??'.$path.'||';
         else
@@ -61,5 +63,17 @@ class dateInfoController extends BaseController
         $dates=GoodDate::where('UserId','=',$request->user('api')->id)->paginate(15);
 
         return GoodDateResource::collection($dates);
+    }
+
+    public function downloadImage(Request $request)
+    {
+        $fileName=strval($request->user('api')->id).'/'.$request->input('fileName');
+        $files=Storage::allFiles(strval($request->user('api')->id));
+        if(!in_array($fileName,$files))
+        {
+            return response()->json(['errorCode'=>1<<9],403);
+        }
+
+        return Storage::download($fileName);
     }
 }

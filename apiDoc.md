@@ -22,9 +22,9 @@
 
 10. post('user/eventinfo)
 
-11. get('user/image/{id}/{filename}')
+11. ## get('user/image')
 
 12. post('user/image/{id}')
 
-      
+    ​    
 
